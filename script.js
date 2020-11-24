@@ -21,15 +21,33 @@ function criarCobrinha(){
     }
  
 }
+/* Evento */
+document.addEventListener('keydown', update);/* pega evento de click e o addEventListener chama update e passa como argumento o evento de tecla 37,38,39,40*/
+
+function update (event){
+    if(event.keyCode == 37 && direction != "right") direction = "left"; /* se direção for 37 e for diferente de direita muda para esquerda */
+    if(event.keyCode == 38 && direction != "down") direction = "up";
+    if(event.keyCode == 39 && direction != "left") direction = "right";
+    if(event.keyCode == 40 && direction != "up") direction = "down";
+}
+
+
 
 /* função que atualiza o jogo em time, e parar o jogo quando cobra bater */
 function iniciarJogo(){
+    /* Plano carteziano X e Y com limites */
+    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;/* Se a cabeça da cobra posição[0] ultrapassar o limite de 15 da direita * o tamanho do Box a posição é zerada e aparece no inicio da esquerda */
+    if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
+    if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * 15;
+
+
     criarBG();
     criarCobrinha();/* chamando outras funções */
 
     /* Ponto de partida */
     let snakeX = snake[0].x;/* array na posição 0 x  */
-    let snakex = snake[0].y;/* array na posição 0 Y */
+    let snakeY = snake[0].y;/* array na posição 0 Y */
 
     /* Cordenadas */
     if(direction == "right") snakeX += box; /* se posição for igual a direita acrescentar quadrado a mais */
