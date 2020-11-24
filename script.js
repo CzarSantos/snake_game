@@ -7,7 +7,11 @@ snake[0] = {
     y: 8 * box,/* definindo tamanho */
 }
 let direction = "right";/* variavel com direção, poderia ser qualquer outro */
+let food = {/* varivael da comida */
+    x: Math.floor(Math.random() * 15 + 1) * box, /* numeros aleatoririos inteiros até 16 | match floor tira virgulas */
+    y: Math.floor(Math.random() * 15 + 1) * box
 
+}
 
 function criarBG(){/* background do canvas */
     context.fillStyle = "lightgreen";/*Cor de fundo */
@@ -21,6 +25,17 @@ function criarCobrinha(){
     }
  
 }
+/* Comida */
+
+function drawFood(){
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);/* passando posições */
+
+}
+
+
+
+
 /* Evento */
 document.addEventListener('keydown', update);/* pega evento de click e o addEventListener chama update e passa como argumento o evento de tecla 37,38,39,40*/
 
@@ -42,8 +57,10 @@ function iniciarJogo(){
     if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * 15;
 
 
+    /* chamando outras funções */
     criarBG();
-    criarCobrinha();/* chamando outras funções */
+    criarCobrinha();
+    drawFood();
 
     /* Ponto de partida */
     let snakeX = snake[0].x;/* array na posição 0 x  */
