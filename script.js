@@ -48,13 +48,21 @@ function update (event){
 
 
 
-/* função que atualiza o jogo em time, e parar o jogo quando cobra bater */
+/* função que atualiza o jogo em time, e parar o jogo quando cobra bater nas extremidades*/
 function iniciarJogo(){
     /* Plano carteziano X e Y com limites */
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;/* Se a cabeça da cobra posição[0] ultrapassar o limite de 15 da direita * o tamanho do Box a posição é zerada e aparece no inicio da esquerda */
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
-    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * 15;
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;
+
+    /* função de impacto do elemento */
+    for(i =1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){/* Se a posição [0]x de snake for igual a [i]x && se a posição [0]de Y for igual [i]de Y  */
+            clearInterval(jogo);/* parando função */
+            alert("Fim de jogo!");
+        }
+    }
 
 
     /* chamando outras funções */
