@@ -72,11 +72,24 @@ function iniciarJogo(){
     if(direction == "up") snakeY -= box;/* Y Pra cima */
     if(direction == "down") snakeY += box;/* Y Pra baixo */
 
-    /* Retira ultimo elemento do Array */
-    snake.pop();
+
+    /* condição ao passar por cima da comida */
+    if(snakeX != food.x || snakeY != food.y){
+        /* Retira ultimo elemento do Array */
+        snake.pop();
+
+    }
+    else{
+        /* Se não: posições aletorias  */
+        food.x = Math.floor(Math.random() * 15 + 1) * box; /* numeros aleatoririos inteiros até 16 | match floor tira virgulas */
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+
+    }
+
+
+    
 
     /* Acrescenta +1 a no primeiro elemento */
-
     let newHead = {
         x: snakeX,
         y: snakeY
